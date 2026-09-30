@@ -123,16 +123,6 @@ Open and run **`Grammar_Scoring_Engine.ipynb`** sequentially. The notebook execu
 
 ---
 
-## 📝 Scoring Rubric Reference
-
-| Grammar Score | Official Description |
-| :---: | :--- |
-| **1.0** | Speech struggles with proper sentence structure; limited control over simple grammatical structures; relies on memorized patterns. |
-| **2.0** | Limited understanding of sentence syntax; basic grammatical mistakes; sentences often left incomplete. |
-| **3.0** | Decent grasp of sentence structure with grammatical errors, OR decent grammatical grasp with structural/syntax errors. |
-| **4.0** | Strong understanding of grammar and syntax; minor occasional errors that do not impair understanding. |
-| **5.0** | High grammatical accuracy; adept control of complex language structures; seldom makes noticeable mistakes. |
-
 ---
 
 ## 🛠️ Key Design Decisions & Research Learnings
