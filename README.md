@@ -94,15 +94,10 @@ silence_ratio           118     Percentage of clip spent in silent hesitation
 
 ```
 shl-grammar-scoring/
-├── README.md                     # Project overview and reproduction guide
-├── requirements.txt              # Environment dependencies
-├── competition_details.md        # Rubric and competition guidelines
-├── Grammar_Scoring_Engine.ipynb  # End-to-end master submission notebook with brief report
-├── 00_data_exploration.py        # EDA: Dataset distribution & audio properties
-├── 01_transcribe.py              # Error-preserving ASR using Faster-Whisper
-├── 02_train_deberta.py           # 5-fold DeBERTa-v3 fine-tuning
-├── 03_extract_audio_features.py  # Acoustic prosodic feature extraction (Librosa)
-├── 04_train_lightgbm.py          # Multimodal LightGBM stacking & final submission
+├── README.md                     # Project overview, methodology & benchmark results
+├── Grammar_Scoring_Engine.ipynb  # End-to-end master submission notebook (Code + Brief Report + Visualizations)
+├── requirements.txt              # Pinned environment dependencies
+└── .gitignore                    # Ignore large binaries, model weights, and audio files
 ```
 
 ---
@@ -116,41 +111,15 @@ cd shl-grammar-scoring
 pip install -r requirements.txt
 ```
 
-### 2. Step-by-Step Execution
-
-#### Step 0: Data Exploration
-Inspect dataset shapes, missing files, duration distributions, and label balance:
-```bash
-python 00_data_exploration.py
-```
-
-#### Step 1: Speech-to-Text Transcription
-Transcribe raw `.wav` files to verbatim transcripts using Faster-Whisper Large-v3:
-```bash
-python 01_transcribe.py
-```
-*Outputs: `train_transcripts.csv`, `test_transcripts.csv`*
-
-#### Step 2: Fine-Tune DeBERTa-v3
-Train 5-fold cross-validated DeBERTa-v3 with differential learning rates:
-```bash
-python 02_train_deberta.py
-```
-*Outputs: `train_oof_predictions.csv`, `submission.csv`, `deberta_fold*.pt`*
-
-#### Step 3: Extract Acoustic Prosody Features
-Compute WPM, silence ratios, RMS energy, and zero-crossing rates:
-```bash
-python 03_extract_audio_features.py
-```
-*Outputs: `train_audio_features.csv`, `test_audio_features.csv`*
-
-#### Step 4: LightGBM Multimodal Stacking
-Train the stacking regressor combining textual OOFs and acoustic features:
-```bash
-python 04_train_lightgbm.py
-```
-*Outputs: `submission_lgb.csv` (Final test predictions with **RMSE 0.4802**)*
+### 2. Running the Solution
+Open and run **`Grammar_Scoring_Engine.ipynb`** sequentially. The notebook executes all steps end-to-end:
+1. **Exploratory Data Analysis:** Visualizes Likert label distributions and duration profiles.
+2. **Speech-to-Text Transcription:** Transcribes `.wav` files using Faster-Whisper Large-v3 with verbatim error retention.
+3. **DeBERTa-v3 Fine-Tuning:** 5-fold cross-validated training using differential learning rates.
+4. **Acoustic Feature Extraction:** Extracts WPM, silence ratios, RMS energy, and zero-crossing rates.
+5. **LightGBM Multimodal Stacking:** Fuses linguistic probabilities with acoustic signals.
+6. **Evaluation & Visualization:** Computes the compulsory training RMSE, Pearson correlation, and renders diagnostic plots.
+7. **Submission Export:** Generates the final test predictions (`submission_lgb.csv` with **Test RMSE 0.4802**).
 
 ---
 
