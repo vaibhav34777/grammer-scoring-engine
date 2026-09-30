@@ -107,7 +107,7 @@ shl-grammar-scoring/
 ### 1. Environment Setup
 ```bash
 git clone <your-repo-url>
-cd shl-grammar-scoring
+cd grammar-scoring-engine
 pip install -r requirements.txt
 ```
 
