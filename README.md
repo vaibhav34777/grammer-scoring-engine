@@ -97,12 +97,12 @@ shl-grammar-scoring/
 ├── README.md                     # Project overview and reproduction guide
 ├── requirements.txt              # Environment dependencies
 ├── competition_details.md        # Rubric and competition guidelines
+├── Grammar_Scoring_Engine.ipynb  # End-to-end master submission notebook with brief report
 ├── 00_data_exploration.py        # EDA: Dataset distribution & audio properties
 ├── 01_transcribe.py              # Error-preserving ASR using Faster-Whisper
 ├── 02_train_deberta.py           # 5-fold DeBERTa-v3 fine-tuning
-├── 03_train_qwen.py              # LLM QLoRA baseline experiment (Qwen2.5-3B)
-├── 04_extract_audio_features.py  # Acoustic prosodic feature extraction (Librosa)
-├── 05_train_lightgbm.py          # Multimodal LightGBM stacking & final submission
+├── 03_extract_audio_features.py  # Acoustic prosodic feature extraction (Librosa)
+├── 04_train_lightgbm.py          # Multimodal LightGBM stacking & final submission
 ```
 
 ---
@@ -141,14 +141,14 @@ python 02_train_deberta.py
 #### Step 3: Extract Acoustic Prosody Features
 Compute WPM, silence ratios, RMS energy, and zero-crossing rates:
 ```bash
-python 04_extract_audio_features.py
+python 03_extract_audio_features.py
 ```
 *Outputs: `train_audio_features.csv`, `test_audio_features.csv`*
 
 #### Step 4: LightGBM Multimodal Stacking
 Train the stacking regressor combining textual OOFs and acoustic features:
 ```bash
-python 05_train_lightgbm.py
+python 04_train_lightgbm.py
 ```
 *Outputs: `submission_lgb.csv` (Final test predictions with **RMSE 0.4802**)*
 
